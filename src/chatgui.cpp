@@ -107,6 +107,7 @@ END_EVENT_TABLE()
 ChatBotPanelDialog::ChatBotPanelDialog(wxWindow *parent, wxWindowID id)
     : wxScrolledWindow(parent, id)
 {
+    std::cout << "Constructor Of ChatBotPanelDialog" << std::endl ; 
     // sizer will take care of determining the needed scroll size
     _dialogSizer = new wxBoxSizer(wxVERTICAL);
     this->SetSizer(_dialogSizer);
@@ -118,11 +119,13 @@ ChatBotPanelDialog::ChatBotPanelDialog(wxWindow *parent, wxWindowID id)
     ////
 
     // create chat logic instance
-    _chatLogic = new ChatLogic(); 
-
+    std::cout << "Before ChatLogic Pointer \n";
+     _chatLogic = std::make_unique<ChatLogic>();
+    std::cout << "After ChatLogic Pointer \n"; 
     // pass pointer to chatbot dialog so answers can be displayed in GUI
+    std::cout << "First function \n";
     _chatLogic->SetPanelDialogHandle(this);
-
+    std::cout << "Second Function \n";
     // load answer graph from file
     _chatLogic->LoadAnswerGraphFromFile(dataPath + "src/answergraph.txt");
 
@@ -134,8 +137,10 @@ ChatBotPanelDialog::~ChatBotPanelDialog()
 {
     //// STUDENT CODE
     ////
+    std::cout << "Destructor Of ChatBotPanelDialog" << std::endl ; 
 
-    delete _chatLogic;
+
+    // delete _chatLogic;
 
     ////
     //// EOF STUDENT CODE
